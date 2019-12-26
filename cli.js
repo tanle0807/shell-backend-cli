@@ -6,6 +6,7 @@ const figlet = require('figlet')
 const child_process = require('child_process')
 const exec = util.promisify(child_process.exec);
 const shell = require('shelljs');
+const spawn = require('cross-spawn');
 
 async function execute() {
     const {
@@ -18,7 +19,7 @@ async function execute() {
 const init = () => {
     console.log(
         chalk.green(
-            figlet.textSync("BACKEND CLI", {
+            figlet.textSync("MOBILE CLI", {
                 font: "Big",
                 horizontalLayout: "default",
                 verticalLayout: "default"
@@ -31,7 +32,7 @@ async function cli(args) {
     init()
     while (true) {
         try {
-            child_process.execFileSync('schematics', ['../schematic/backend-cli/src/collection.json:backend-cli', '--debug=false'], {
+            spawn.sync('schematics', ['../schematic/backend-cli/src/collection.json:mobile-cli', '--debug=false'], {
                 stdio: 'inherit'
             });
         } catch (error) {
